@@ -1,13 +1,16 @@
+import os
 import requests
 from datetime import datetime
-
+from dotenv import load_dotenv
+load_dotenv()
 current_date = datetime.now().strftime("%d/%m/%Y")
+API_KEY = os.getenv("API_KEY")
 
 
 def create_linear_issue(title, description, team_id, label_ids, assignee_id):
     url = "https://api.linear.app/graphql"
     headers = {
-        "Authorization": "Bearer lin_api_SXjav6DzW08KLl3kEguWBFZW1XCNEBeOOhnLhcEp",
+        "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json",
     }
     mutation = """
@@ -50,7 +53,7 @@ def create_linear_issue(title, description, team_id, label_ids, assignee_id):
 def create_sub_issue(title, description, parent_issue_id, label_ids, assignee_id):
     url = "https://api.linear.app/graphql"
     headers = {
-        "Authorization": "Bearer lin_api_SXjav6DzW08KLl3kEguWBFZW1XCNEBeOOhnLhcEp", 
+        "Authorization": f"Bearer {API_KEY}", 
         "Content-Type": "application/json",
     }
     mutation = """
